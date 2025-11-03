@@ -11,3 +11,12 @@ const order = (item, callback) =>{
 }
 
 order("Burger", notifyCustomer);
+
+
+
+
+function sayHello(){
+    console.log("Hey I am Prince");
+}
+
+setTimeout(sayHello, 2000);
