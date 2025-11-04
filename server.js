@@ -6,6 +6,10 @@ const cookieParser = require('cookie-parser');
 
 app.use(cookieParser());
 
+app.get("/getsignedcookie", (req, res) =>{
+    res.cookie("made-in", "India", {signed: true});
+});
+
 app.get("/getcookies", (req, res) =>{
     res.cookie("greet", "Namaste");
     res.cookie("madeIn", "India");
