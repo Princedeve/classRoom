@@ -5,11 +5,36 @@ const posts = require("./routes/post.js");
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
-app.use(session({secret: "mysecretstring"}));
+const sessionOptions = {
+    secret: "mysecretstring", 
+    resave: false,
+    saveUninitialized: true,
+};
+//middleware
+app.use(session(sessionOptions));
 
-app.get("/test", (req, res) =>{
-    res.send("test successful!");
+app.get("/register", (req, res) =>{
+    let {name = "anonymous"} = req.query;
+    req.session.name = name;
+    res.redirect("/hello");
 });
+
+app.get("/hello", (req, res) =>{
+    res.send(`hello ${req.session.name}`);
+});
+
+// app.get("/reqcount", (req, res) => {
+//     if(req.session.count){
+//         req.session.count++;
+//     }else{
+//         req.session.count = 1;
+//     } 
+//     res.send(`You sent a request ${req.session.count} times`);
+// });
+
+// app.get("/test", (req, res) =>{
+//     res.send("test successful!");
+// });
 
 // app.use(cookieParser("secretcode"));
 
